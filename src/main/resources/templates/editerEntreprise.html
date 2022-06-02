@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ layout:decorator="template"> 
+<link rel="stylesheet" type="text/css"
+href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title>Ajout des Entreprises</title>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+<div class="container mt-5">
+<div class="card">
+ <div class="card-header">
+ Modifier des Entreprises
+ </div>
+ <div class="card-body">
+<form th:action="@{saveEntreprise}" method="post">
+<div class="form-group">
+<label class="control-label" hidden>ID Entreprise :</label>
+ <input type="hidden" name="idEntreprise" class="form-control"
+th:value="${entreprise.idEntreprise}" />
+</div>
+<div class="form-group">
+<label class="control-label">Nom Entreprise :</label>
+<input type="text" name="nomEntreprise" class="form-control"
+th:value="${entreprise.nomEntreprise}" />
+<span th:errors= ${entreprise.nomEntreprise} class="text-danger">
+</span>
+</div>
+<div class="form-group">
+<label class="control-label">Capital :</label>
+ <input type="text" name="capital" class="form-control"
+th:value="${entreprise.capital}" />
+ <span th:errors=${entreprise.capital} class="text-danger">
+</span>
+</div>
+<div class="form-group">
+<label class="control-label">date création :</label>
+<input type="date" name="dateCreation" class="form-control" 
+th:value="${entreprise.dateCreation}"/>
+<span th:errors=${entreprise.dateCreation} class="text-danger">
+</span>
+</div>
+<div>
+<button type="submit" class="btn btn-primary">Valider</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

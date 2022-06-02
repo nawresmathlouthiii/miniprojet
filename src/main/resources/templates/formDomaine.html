@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template">
+<link rel="stylesheet" type="text/css"
+href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title >Formulaire des domaine</title>
+
+</head>
+<body>
+<div layout:fragment="Mycontent">
+<div class="container mt-5">
+<div class="card">
+<div class="card-header" th:if="${mode=='new'}"> Ajout des domaines </div>
+<div class="card-header" th:if="${mode=='edit'}">Modification des domaines</div>
+<div class="card-body">
+ <form th:action="@{saveDomaine}" method="post">
+ <div class="form-group">
+<label class="control-label" hidden>ID Domaine :</label>
+ <input type="hidden" name="idDom" class="form-control" th:value="${domaine.idDom}" />
+</div>
+<div class="form-group">
+ <label class="control-label">Nom Domaine :</label>
+ <input type="text" name="nomDom" class="form-control" th:value="${domaine.nomDom}"/>
+  <span th:errors= ${domaine.nomDom} class="text-danger"> </span>
+</div>
+<div class="form-group">
+<label class="control-label">Description domaine :</label>
+<input type="text" name="descriptionDom" class="form-control" th:value="${domaine.descriptionDom}"  />
+<span th:errors=${domaine.descriptionDom} class="text-danger"> </span>
+</div>
+<div>
+<button type="submit" class="btn btn-primary" th:if="${mode=='new'}">Ajouter</button>
+<button type="submit" class="btn btn-primary" th:if="${mode=='edit'}">Modifier</button>
+</div>
+</form>
+
+</div>
+ </div>
+ </div>
+ </div>
+</body>
+</html>

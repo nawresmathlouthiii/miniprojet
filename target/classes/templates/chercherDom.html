@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template">
+      
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title>Liste des Entreprises</title>
+</head>
+<body>
+   <div layout:fragment="Mycontent">
+	<div class="container mt-5">
+		<div class="card">
+			<div class="card-header">Liste des Entreprises</div>
+			<div class="card-body">
+ <table class="table table-striped">
+ <tr>
+ <th>ID</th><th>Nom Entreprise</th><th>capital</th><th>date creation</th><th>domaine</th>
+  <th sec:authorize="hasRole('ADMIN')" >Modifier</th><th sec:authorize="hasRole('ADMIN')" >Supprimer</th>
+ </tr> 
+ <tr th:each="e:${categories}">
+						<td th:text="${e.idEntreprise}"></td>
+						<td th:text="${e.nomEntreprise}"></td>
+						 
+						<td th:text="${e.capital}"></td> 
+						<td th:text="${e.dateCreation}"></td>
+						<td th:text="${e.domaine.nomDom}"></td> 
+						<td sec:authorize="hasRole('ADMIN')" ><a class="btn btn-danger" onclick="return confirm('Etes-vous sûr ?')" th:href="@{supprimerEntreprise(id=${e.idEntreprise},page=${currentPage},size=${size})}">Supprimer</a>
+</td>
+<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-success"
+th:href="@{modifierEntreprise(id=${e.idEntreprise})}">Editer</a></td>
+</tr>
+				</table>
+				<ul class="nav nav-pills">
+					<li th:each="page,status:${pages}"><a
+						th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+						th:href="@{ ListeEntreprises(page=${status.index}, size=${size} ) }"
+						th:text="${status.index }"></a></li>
+				</ul>
+ </div>
+</div>
+</div>
+</div>
+</body>
+</html>
